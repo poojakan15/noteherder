@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Sidebae from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 import Sidebar from './Sidebar';
