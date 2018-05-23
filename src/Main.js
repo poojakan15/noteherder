@@ -72,7 +72,8 @@ class Main extends React.Component {
   }
 }
 
-const data = Object.assign({}, localStorage)
+// const data = Object.assign({}, localStorage)
+const data = window.localStorage
 
 const style = {
   display: 'flex',
