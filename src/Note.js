@@ -4,7 +4,7 @@ const Note = (props) => {
     return (
         <li className="Note">
         <div className="note">
-            <div class="note-title">
+            <div className="note-title">
                 { props.noteProp.title }
             </div>
             <div className="note-body">

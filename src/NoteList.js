@@ -20,7 +20,7 @@ const NoteList = () => {
     {
       id: 3,
       title: 'Watching the first episode of Black Mirror with your parents',
-      body: 'Don\'t',
+      body: 'Don\'t.',
     },
   ]
 
@@ -28,8 +28,8 @@ const NoteList = () => {
     <div className="NoteList">
       <h3>Notes</h3>
       <ul id="notes">
-        <a class="active">
-          { notes.map(note =>  <Note  noteProp={note} /> ) }
+        <a className="active">
+          { notes.map(note =>  <Note  key={note.id} noteProp={note} /> ) }
         </a>
       </ul>
     </div>
