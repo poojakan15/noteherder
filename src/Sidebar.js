@@ -24,7 +24,7 @@ import newHover from './new-hover.png'
 //     }
 
 //     render() {
-    const Sidebar = () => {
+    const Sidebar = ( { resetCurrentNote } ) => {
         return (
           <nav className={css(styles.sidebar)}>
             <div className={css(styles.logo)}>
@@ -37,6 +37,10 @@ import newHover from './new-hover.png'
             <a
               href="/notes"
               className={css(styles.newNote)}
+              onClick={(ev) => {
+                ev.preventDefault()
+                resetCurrentNote()
+              }}
             >
               <img
                 src={newHover}
