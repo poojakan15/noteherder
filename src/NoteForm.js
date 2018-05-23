@@ -2,7 +2,7 @@ import React from 'react'
 
 import './NoteForm.css'
 
-const NoteForm = () => {
+const NoteForm = (props) => {
     return (
       <div className="NoteForm">
         <div className="form-actions">
