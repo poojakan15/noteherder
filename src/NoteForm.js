@@ -2,15 +2,16 @@ import React from 'react'
 
 import './NoteForm.css'
 
-const NoteForm = ({ currentNote, saveNote }) => {
+const NoteForm = ({ currentNote, saveNote, removeNote }) => {
   const handleChanges = (ev) => {
     const note = {...currentNote} // makes a copy
     note[ev.target.name] = ev.target.value
     saveNote(note)
   }
 
-  const deleteNote =(ev) => {
-    // currentNote.
+  const deleteNote = (ev) => {
+    const note = {...currentNote}
+    removeNote(note)
   }
 
   return (
