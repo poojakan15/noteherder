@@ -51,7 +51,10 @@ import newHover from './new-hover.png'
             </a>
             <div className={css(styles.signOut)}>
               <button className={css(styles.button)}>
-                <i className={`fa fa-sign-out ${css(styles.buttonIcon)}`}></i>
+                <i 
+                    title="sign out" 
+                    className={`fas fa-sign-out-alt ${css(styles.buttonIcon)}`}>
+                </i>
               </button>
             </div>
           </nav>
