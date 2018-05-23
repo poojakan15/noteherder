@@ -1,29 +1,39 @@
 import React from 'react'
 
 import './NoteList.css'
+import Note from './Note'
 
 const NoteList = () => {
-    return (
-        <div className="NoteList">
-          <h3>Notes</h3>
-          <ul id="notes">
-            <a class="active">
-              <li>
-                <div class="note">
-                  <div class="note-title">
-                    Kohlrabi welsh
-                  </div>
-                  <div class="note-body">
-                    <p>
-                      Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </a>
-            </ul>
-        </div>
-    )
+  const notes = [
+    {
+      id: 1,
+      title: 'Why I <3 JS',
+      body: 'Because I like code, and JS is code',
+    },
+
+    {
+      id: 2,
+      title: 'Thoughts on breakfast',
+      body: 'I love it!'
+    },
+
+    {
+      id: 3,
+      title: 'Watching the first episode of Black Mirror with your parents',
+      body: 'Don\'t',
+    },
+  ]
+
+  return (
+    <div className="NoteList">
+      <h3>Notes</h3>
+      <ul id="notes">
+        <a class="active">
+          { notes.map(note =>  <Note  noteProp={note} /> ) }
+        </a>
+      </ul>
+    </div>
+  )
 }
 
 export default NoteList
