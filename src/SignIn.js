@@ -2,9 +2,7 @@ import React from 'react'
 import './SignIn.css' 
 import googleLogo from './google.svg'
 import { auth,githubProvider, googleProvider } from './base'
-// import { githubProvider } from './base'
 
-// fix!
 const SignIn = () => {
     const authenticate = (provider) =>{
         auth.signInWithPopup(provider)
