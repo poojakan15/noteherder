@@ -7,7 +7,7 @@ import { auth } from './base'
 
 class App extends Component {
   state = {
-    uid: null,
+    uid: localStorage.getItem('user')
   }
 
   componentDidMount() {
@@ -21,9 +21,8 @@ class App extends Component {
   }
 
   handleAuth = (user) => {
-    window.localStorage.setItem('uid', user.uid)
+    localStorage.setItem('user', user.uid)
     this.setState({ uid: user.uid })
-    // window.localStorage.setItem('uid', user.uid)
   }
 
   signedIn = () => {
@@ -31,6 +30,7 @@ class App extends Component {
   }
 
   signOut = () => {
+      localStorage.setItem('user', null)
       this.setState({ uid: null })
       auth.signOut()
   }
