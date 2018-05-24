@@ -3,14 +3,25 @@ import React, { Component } from 'react'
 import './App.css'
 import Main from './Main'
 import SignIn from './SignIn'
+import { auth } from './base'
 
 class App extends Component {
   state = {
     uid: null,
   }
 
-  handleAuth = () => {
-    this.setState({ uid: 'pkan' })
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.handleAuth(user)
+      } else {
+        this.signOut()
+      }
+    })
+  }
+
+  handleAuth = (user) => {
+    this.setState({ uid: user.uid })
   }
 
   signedIn = () => {
@@ -19,6 +30,7 @@ class App extends Component {
 
   signOut = () => {
       this.setState({ uid: null })
+      auth.signOut()
   }
 
   render() {
