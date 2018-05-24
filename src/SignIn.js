@@ -1,7 +1,7 @@
 import React from 'react'
 import './SignIn.css' 
 import googleLogo from './google.svg'
-import { auth,githubProvider } from './base'
+import { auth,githubProvider, googleProvider } from './base'
 // import { githubProvider } from './base'
 
 // fix!
@@ -13,7 +13,7 @@ const SignIn = () => {
         <div className="SignIn">
             <header className="Header">
                 <img src="media/quill.svg" alt="" />
-                <span className="title">Noteherder</span>
+                <span className="title"></span>
             </header>
             <main>
                 <h3>Hey, Nerd! You Like Notes?</h3>
@@ -25,7 +25,10 @@ const SignIn = () => {
                     <i className="fab fa-github"></i>
                     Sign in with GitHub
                 </button>
-                <button className="google">
+                <button 
+                    className="google"
+                    onClick={() => authenticate(googleProvider)}    
+                >
                     <img src={googleLogo} alt="" />
                     Sign in with Google
                 </button>
