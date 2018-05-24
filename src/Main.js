@@ -61,6 +61,7 @@ class Main extends React.Component {
     this.setState({ notes })
     this.setCurrentNote(note)
 
+    // window.localStorage.key(uid)
     // window.localStorage.setItem('notes', JSON.stringify(notes))
   }
 

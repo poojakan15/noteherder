@@ -21,7 +21,9 @@ class App extends Component {
   }
 
   handleAuth = (user) => {
+    window.localStorage.setItem('uid', user.uid)
     this.setState({ uid: user.uid })
+    // window.localStorage.setItem('uid', user.uid)
   }
 
   signedIn = () => {
