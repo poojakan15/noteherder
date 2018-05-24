@@ -4,7 +4,7 @@ import googleLogo from './google.svg'
 import { auth } from './base'
 import { githubProvider } from './base'
 
-
+// fix!
 const SignIn = ({  }) => {
     const authenticate = (provider) =>{
         auth.signInWithPopup(provider)
