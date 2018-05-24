@@ -13,6 +13,13 @@ class Main extends React.Component {
     }
   }
 
+  componentDidMount() {
+      const notes = JSON.parse(window.localStorage.getItem('notes'))
+      if(notes) {
+          this.setState({ notes })
+      }
+  }
+
   blankNote = () => {
       return  {
         id: null,
@@ -44,6 +51,8 @@ class Main extends React.Component {
 
     this.setState({ notes })
     this.setCurrentNote(note)
+
+    window.localStorage.setItem('notes', JSON.stringify(notes))
   }
 
   removeNote = (note) => {
@@ -52,9 +61,11 @@ class Main extends React.Component {
     const i = notes.findIndex((note) => note.id === this.state.currentNote.id)
     if (i > -1) {
         notes.splice(i, 1)
+        this.setState({ notes }) 
+        window.localStorage.setItem('notes', JSON.stringify(notes))
     }
     // notes.splice(i, 1)
-    this.setState({ notes }) 
+    // this.setState({ notes }) 
     this.resetCurrentNote()
     // this.setCurrentNote(this.blankNote())
   }
@@ -78,7 +89,7 @@ class Main extends React.Component {
 }
 
 // const data = Object.assign({}, localStorage)
-const data = window.localStorage
+// const data = window.localStorage
 
 const style = {
   display: 'flex',
