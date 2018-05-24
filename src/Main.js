@@ -48,10 +48,15 @@ class Main extends React.Component {
 
   removeNote = (note) => {
     const notes = [...this.state.notes]
-    const i = notes.findIndex((currentNote) => currentNote.id === note.id)
-    notes.splice(i, 1)
+    // const i = notes.findIndex((currentNote) => currentNote.id === note.id)
+    const i = notes.findIndex((note) => note.id === this.state.currentNote.id)
+    if (i > -1) {
+        notes.splice(i, 1)
+    }
+    // notes.splice(i, 1)
     this.setState({ notes }) 
-    this.setCurrentNote(this.blankNote())
+    this.resetCurrentNote()
+    // this.setCurrentNote(this.blankNote())
   }
 
   render() {
