@@ -28,6 +28,10 @@
     font-size: 2rem;
     margin: 0;
   }
+
+  .NoteForm button:hover {
+    color: black;
+  }
   .NoteForm form {
     margin: 0 auto;
     max-width: 80rem;
