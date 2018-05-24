@@ -7,10 +7,13 @@ import { auth } from './base'
 
 class App extends Component {
   state = {
-    uid: localStorage.getItem('user')
+    uid: null,
   }
 
   componentDidMount() {
+    this.setState ({
+      uid: localStorage.getItem('user'),
+    })
     auth.onAuthStateChanged(user => {
       if (user) {
         this.handleAuth(user)
@@ -40,7 +43,7 @@ class App extends Component {
       <div className="App">
         {
           this.signedIn() 
-            ? <Main  signOut={this.signOut}/> 
+            ? <Main  signOut={this.signOut} uid={this.state.uid}/> 
             : <SignIn handleAuth={this.handleAuth}/>
         }
         {/* <Main /> */}
