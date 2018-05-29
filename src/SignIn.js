@@ -5,7 +5,7 @@ import { auth ,githubProvider, googleProvider } from './base'
 
 const SignIn = () => {
     const authenticate = (provider) =>{
-        auth.linkWithPopup(provider)
+        auth.signInWithPopup(provider)
     }
     return (
         <div className="SignIn">
