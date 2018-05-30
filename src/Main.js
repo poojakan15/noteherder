@@ -47,11 +47,13 @@ class Main extends React.Component {
   }
 
   saveNote = (note) => {
+    let shouldRedirect = false
     const notes = [...this.state.notes]
     if(!note.id) {
         // new notes
         note.id = Date.now()
         notes.push(note)
+        shouldRedirect = true
     }
     else {
         // existing note
@@ -60,7 +62,10 @@ class Main extends React.Component {
     }
 
     this.setState({ notes })
-    this.setCurrentNote(note)
+    // this.setCurrentNote(note)
+    if(shouldRedirect) {
+      this.props.history.push(`/notes/${note.id}`)
+    }
 
     // window.localStorage.key(uid)
     // window.localStorage.setItem('notes', JSON.stringify(notes))
@@ -86,7 +91,7 @@ class Main extends React.Component {
       currentNote: this.state.currentNote,
       saveNote: this.saveNote,
       removeCurrentNote: this.removeCurrentNote,
-      notes: this.state.note,
+      notes: this.state.notes,
     }
 
     return (
