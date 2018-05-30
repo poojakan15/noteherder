@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 import Sidebar from './Sidebar'
 import NoteList from './NoteList'
@@ -65,7 +66,7 @@ class Main extends React.Component {
     // window.localStorage.setItem('notes', JSON.stringify(notes))
   }
 
-  removeNote = (note) => {
+  removeCurrentNote = (note) => {
     const notes = [...this.state.notes]
     // const i = notes.findIndex((currentNote) => currentNote.id === note.id)
     const i = notes.findIndex((note) => note.id === this.state.currentNote.id)
@@ -81,6 +82,13 @@ class Main extends React.Component {
   }
 
   render() {
+    const formProps ={
+      currentNote: this.state.currentNote,
+      saveNote: this.saveNote,
+      removeCurrentNote: this.removeCurrentNote,
+      notes: this.state.note,
+    }
+
     return (
       <div className="Main" style={style}>
         <Sidebar 
@@ -89,20 +97,39 @@ class Main extends React.Component {
         />
         <NoteList
           notes={this.state.notes}
-          setCurrentNote={this.setCurrentNote}
+          // setCurrentNote={this.setCurrentNote}
         />
-        <NoteForm 
+        {/* <NoteForm 
             currentNote={this.state.currentNote} 
             saveNote={this.saveNote}  
             removeNote={this.removeNote}  
+        /> */}
+        <Switch>
+        <Route 
+          path="/notes/:id" 
+          render={navProps => (
+            <NoteForm 
+              // currentNote={this.state.currentNote} 
+              // saveNote={this.saveNote}  
+              // removeNote={this.removeNote}  
+              {...formProps}
+              {...navProps}
+            />       
+          )}
         />
+        <Route
+          render={navProps => (
+            <NoteForm
+              {...formProps}
+              {...navProps}
+          />
+          )}
+          />
+        </Switch>
       </div>
     )
   }
 }
-
-// const data = Object.assign({}, localStorage)
-// const data = window.localStorage
 
 const style = {
   display: 'flex',
