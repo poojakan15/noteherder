@@ -10,7 +10,7 @@ class Main extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentNote: this.blankNote(),
+      // currentNote: this.blankNote(),
       notes: [],
     }
   }
@@ -38,13 +38,13 @@ class Main extends React.Component {
       }
   }
 
-  setCurrentNote = (note) => {
-    this.setState({ currentNote: note })
-  }
+  // setCurrentNote = (note) => {
+  //   this.setState({ currentNote: note })
+  // }
 
-  resetCurrentNote = () => {
-      this.setCurrentNote(this.blankNote())
-  }
+  // resetCurrentNote = () => {
+  //     this.setCurrentNote(this.blankNote())
+  // }
 
   saveNote = (note) => {
     let shouldRedirect = false
@@ -71,26 +71,29 @@ class Main extends React.Component {
     // window.localStorage.setItem('notes', JSON.stringify(notes))
   }
 
-  removeCurrentNote = (note) => {
+  removeNote = (currentNote) => {
     const notes = [...this.state.notes]
+    const id = this.props.match.params.id
     // const i = notes.findIndex((currentNote) => currentNote.id === note.id)
-    const i = notes.findIndex((note) => note.id === this.state.currentNote.id)
+    const i = notes.findIndex((note) => note.id === currentNote.id)
     if (i > -1) {
         notes.splice(i, 1)
         this.setState({ notes }) 
+        this.props.history.push(`/notes`)
         // window.localStorage.setItem('notes', JSON.stringify(notes))
     }
     // notes.splice(i, 1)
     // this.setState({ notes }) 
-    this.resetCurrentNote()
+    // this.resetCurrentNote()
+
     // this.setCurrentNote(this.blankNote())
   }
 
   render() {
     const formProps ={
-      currentNote: this.state.currentNote,
+      // currentNote: this.state.currentNote,
       saveNote: this.saveNote,
-      removeCurrentNote: this.removeCurrentNote,
+      removeNote: this.removeNote,
       notes: this.state.notes,
     }
 
