@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 import Main from './Main'
@@ -44,8 +44,23 @@ class App extends Component {
     return (
       <div className="App">
       <Switch>
-        <Route path="/sign-in" component={SignIn} />
-        <Route path="/notes" render={() => <Main  signOut={this.signOut} uid={this.state.uid}/> }/>
+        <Route 
+          path="/sign-in" 
+          render={() => (
+            this.signedIn()
+             ? <Main />
+             : <SignIn />
+          )}
+        />
+        <Route 
+          path="/notes" 
+          render={() => (
+              this.signedIn()
+              // ? <Main  signOut={this.signOut} uid={this.state.uid}/> 
+              ? <Redirect to="/notes" />
+              : <Redirect to="/sign-in" />
+            )}
+        />
       </Switch>
         {/* {
           this.signedIn() 
