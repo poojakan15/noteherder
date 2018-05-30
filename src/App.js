@@ -20,7 +20,7 @@ class App extends Component {
       if (user) {
         this.handleAuth(user)
       } else {
-        this.signOut()
+        this.handleUnauth()
       }
     })
   }
@@ -30,13 +30,18 @@ class App extends Component {
     localStorage.setItem('uid', user.uid)
   }
 
+  handleUnauth = () => {
+    this.setState({ uid: null })
+    localStorage.removeItem('uid')
+  }
+
   signedIn = () => {
     return this.state.uid
   }
 
   signOut = () => {
-      this.setState({ uid: null })
-      localStorage.removeItem('uid')
+      // this.setState({ uid: null })
+      // localStorage.removeItem('uid')
       auth.signOut()
   }
 
@@ -46,7 +51,7 @@ class App extends Component {
       <Switch>
         <Route 
           path="/sign-in" 
-          render={(navProps) => (
+          render={navProps => (
             this.signedIn()
              ? <Redirect to="/notes"/>
              : <SignIn {...navProps}/>
@@ -54,9 +59,13 @@ class App extends Component {
         />
         <Route 
           path="/notes" 
-          render={(navProps) => (
+          render={navProps => (
               this.signedIn()
-              ? <Main  signOut={this.signOut} uid={this.state.uid} {...navProps}/> 
+              ? <Main  
+                  signOut={this.signOut} 
+                  uid={this.state.uid} 
+                  {...navProps}
+                /> 
               // ? <Redirect to="/notes" />
               : <Redirect to="/sign-in" />
             )}

@@ -61,11 +61,13 @@ class Main extends React.Component {
         notes[i] = note
     }
 
-    this.setState({ notes })
+    this.setState({ notes }, () => {
+      if(shouldRedirect) {
+        this.props.history.push(`/notes/${note.id}`)
+      }
+    })
     // this.setCurrentNote(note)
-    if(shouldRedirect) {
-      this.props.history.push(`/notes/${note.id}`)
-    }
+   
 
     // window.localStorage.key(uid)
     // window.localStorage.setItem('notes', JSON.stringify(notes))
@@ -73,7 +75,7 @@ class Main extends React.Component {
 
   removeNote = (currentNote) => {
     const notes = [...this.state.notes]
-    const id = this.props.match.params.id
+    // const id = this.props.match.params.id
     // const i = notes.findIndex((currentNote) => currentNote.id === note.id)
     const i = notes.findIndex((note) => note.id === currentNote.id)
     if (i > -1) {
@@ -100,7 +102,7 @@ class Main extends React.Component {
     return (
       <div className="Main" style={style}>
         <Sidebar 
-            resetCurrentNote = {this.resetCurrentNote} 
+            // resetCurrentNote = {this.resetCurrentNote} 
             signOut = {this.props.signOut}
         />
         <NoteList
