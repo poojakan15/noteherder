@@ -48,7 +48,7 @@ class App extends Component {
           path="/sign-in" 
           render={() => (
             this.signedIn()
-             ? <Main />
+             ? <Redirect to="/notes"/>
              : <SignIn />
           )}
         />
@@ -56,10 +56,19 @@ class App extends Component {
           path="/notes" 
           render={() => (
               this.signedIn()
-              // ? <Main  signOut={this.signOut} uid={this.state.uid}/> 
-              ? <Redirect to="/notes" />
+              ? <Main  signOut={this.signOut} uid={this.state.uid}/> 
+              // ? <Redirect to="/notes" />
               : <Redirect to="/sign-in" />
             )}
+        />
+        <Route 
+          render={() => (
+            this.signedIn()
+            ? <Redirect to="/notes" />
+            : <Redirect to="/sign-in" />
+          )
+
+          }
         />
       </Switch>
         {/* {
