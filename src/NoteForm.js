@@ -11,19 +11,36 @@ class NoteForm extends Component {
     }
   }
 
-  componentWillReceiveProps = (newProps) => {
+  componentDidUpdate = () => {
     // Get the ID from the URL
-    const newId = newProps.match.params.id
-
-    // Find the note with that ID
-    const i = newProps.notes.findIndex(currentNote => currentNote.id.toString() === newId)
-    const note = newProps.notes[i] || this.blankNote()
-
-    // Update state with that note, if found
-    if (note) {
-      this.setState({ note })
+    const newId = this.props.match.params.id || ''
+    // Get the previous ID from state
+    const oldId = this.state.note.id || ''
+    // Continue only if they are different
+    if(newId !== oldId.toString()) {
+      // Find the note with that ID
+      const i = this.props.notes.findIndex(currentNote => currentNote.id.toString() === newId)
+      const note = this.props.notes[i] || this.blankNote()
+      // Update state with that note
+      if(note.id !== this.state.note.id) {
+        this.setState({ note })
+      }
     }
   }
+
+  // componentWillReceiveProps = (newProps) => {
+  //   // Get the ID from the URL
+  //   const newId = newProps.match.params.id
+
+  //   // Find the note with that ID
+  //   const i = newProps.notes.findIndex(currentNote => currentNote.id.toString() === newId)
+  //   const note = newProps.notes[i] || this.blankNote()
+
+  //   // Update state with that note, if found
+  //   if (note) {
+  //     this.setState({ note })
+  //   }
+  // }
 
   blankNote = () => {
     return {
