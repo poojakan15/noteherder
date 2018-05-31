@@ -35,6 +35,7 @@ class Main extends React.Component {
         id: null,
         title: '',
         body: '',
+        updatedAt: null,
       }
   }
 
@@ -48,10 +49,13 @@ class Main extends React.Component {
 
   saveNote = (note) => {
     let shouldRedirect = false
+    const timeStamp = Date.now()
+    note.updatedAt = timeStamp
+
     const notes = [...this.state.notes]
     if(!note.id) {
         // new notes
-        note.id = Date.now()
+        note.id = timeStamp
         notes.push(note)
         shouldRedirect = true
     }
@@ -60,6 +64,10 @@ class Main extends React.Component {
         const i = notes.findIndex((currentNote) => currentNote.id === note.id)
         notes[i] = note
     }
+
+    notes.sort((a, b) => {
+      return b.updatedAt - a.updatedAt
+    })
 
     this.setState({ notes }, () => {
       if(shouldRedirect) {
